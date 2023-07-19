@@ -1,0 +1,14 @@
+name: 'STAGE_NESTING_TEST_$(Date:yyyyMMdd).$(Rev:rrr)'
+
+pr: none
+
+trigger: none
+
+pool:
+  name: Default
+
+stages:
+  - template: 'S1.template.yml'
+  - template: 'S2-1.template.yml'
+  - template: 'S2-2.template.yml'
+  - template: 'S3.template.yml'

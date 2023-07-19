@@ -1,0 +1,11 @@
+stages:
+  - stage: "PostDeploy"
+    displayName: "Deploy Jobs"
+    dependsOn:
+      - DeployApi
+      - DeployJobs
+    jobs:
+      - job:
+        steps:
+          - bash: |
+              echo "We are done..."

@@ -1,0 +1,11 @@
+stages:
+  - stage: "DeployApi"
+    displayName: "Deploy API"
+    dependsOn:
+      - Build
+    jobs:
+      - job:
+        steps:
+          - bash: |
+              echo "Deploying API..."
+              sleep 55

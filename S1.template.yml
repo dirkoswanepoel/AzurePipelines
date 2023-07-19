@@ -1,0 +1,8 @@
+stages:
+  - stage: "Build"
+    displayName: "Build the thing"
+    jobs:
+      - job:
+        steps:
+          - bash: |
+              echo "Building..."   
