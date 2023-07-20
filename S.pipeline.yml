@@ -8,7 +8,7 @@ pool:
   name: Default
 
 stages:
-  - template: 'S1.template.yml'
-  - template: 'S2-1.template.yml'
-  - template: 'S2-2.template.yml'
-  - template: 'S3.template.yml'
+  - template: './templates/S1.template.yml'
+  - template: './templates/S2-1.template.yml'
+  - template: './templates/S2-2.template.yml'
+  - template: './templates/S3.template.yml'
