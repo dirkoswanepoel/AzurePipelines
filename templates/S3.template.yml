@@ -7,5 +7,4 @@ stages:
     jobs:
       - job:
         steps:
-          - bash: |
-              echo "We are done..."
+          - template: 'CoLoBugger.template.yml'
