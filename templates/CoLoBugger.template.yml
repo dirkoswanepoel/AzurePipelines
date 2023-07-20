@@ -1,3 +1,5 @@
 jobs:
-  - bash: |
-      echo "I'm the nested bugger"
+  - job:
+    steps:
+      - bash: |
+          echo "I'm the nested bugger"
