@@ -5,6 +5,4 @@ stages:
       - DeployApi
       - DeployJobs
     jobs:
-      - job:
-        steps:
-          - template: 'CoLoBugger.template.yml'
+      - template: 'CoLoBugger.template.yml'
