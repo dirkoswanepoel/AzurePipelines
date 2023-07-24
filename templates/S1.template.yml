@@ -8,7 +8,7 @@ stages:
     displayName: "Build the thing"
     jobs:
       - job:
-        condition: and(succeeded(), eq(${{ parameters.something.shouldBeTrue }}, True))
+        condition: eq(${{ parameters.something.shouldBeTrue }}, True)
         steps:
           - bash: |
               echo "Building..."   
