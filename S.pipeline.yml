@@ -10,7 +10,7 @@ pool:
 stages:
   - template: './templates/S1.template.yml'
     parameters:
-      something:
+      nothing:
         shouldBeTrue: True
         shouldBeFalse: True
   - template: './templates/S2-1.template.yml'
