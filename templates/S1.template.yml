@@ -2,6 +2,9 @@ parameters:
   something:
     shouldBeTrue: True
     shouldBeFalse: False
+  nothing:
+    shouldBeTrue: True
+    shouldBeFalse: False
 
 stages:
   - stage: "Build"
