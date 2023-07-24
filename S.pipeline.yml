@@ -9,6 +9,9 @@ pool:
 
 stages:
   - template: './templates/S1.template.yml'
+    parameters:
+      something:
+        shouldBeFalse: True
   - template: './templates/S2-1.template.yml'
   - template: './templates/S2-2.template.yml'
   - template: './templates/S3.template.yml'
