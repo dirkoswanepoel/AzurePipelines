@@ -1,4 +1,6 @@
 parameters:
+  shouldBeTrue: True
+  shouldBeFalse: False
   something:
     shouldBeTrue: True
     shouldBeFalse: False
@@ -11,7 +13,7 @@ stages:
     displayName: "Build the thing"
     jobs:
       - job:
-        condition: eq(${{ parameters.something.shouldBeTrue }}, True)
+        condition: eq(${{ parameters.shouldBeTrue }}, True)
         steps:
           - bash: |
               echo "Building..."   
