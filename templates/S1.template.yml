@@ -16,4 +16,5 @@ stages:
         condition: eq(${{ parameters.shouldBeTrue }}, True)
         steps:
           - bash: |
+              echo "${{ parameters.shouldBeTrue }}"
               echo "Building..."   
