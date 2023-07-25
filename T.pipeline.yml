@@ -26,5 +26,11 @@ stages:
         parameters:
           job:
             dependsOn: 'bash1'
+            name: 'innerBash1'
+      - template: 'templates/T1.template.yml'
+        parameters:
+          job:
+            dependsOn: 'innerBash1'
+            name: 'innerBash2'
         
             
