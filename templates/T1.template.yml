@@ -4,7 +4,7 @@ parameters:
 
 jobs:
   - job: 'innerBash1'
-    displayName: 'Run some inner bash'
+    displayName: 'Run some inner bash 1'
     dependsOn:
       - ${{ parameters.job.dependsOn }}
     steps:
@@ -12,7 +12,7 @@ jobs:
           echo 'Template...'
           sleep 30
   - job: 'innerBash2'
-    displayName: 'Run some inner bash'
+    displayName: 'Run some inner bash 2'
     dependsOn:
       - 'innerBash1'
     steps:
