@@ -10,7 +10,7 @@ jobs:
     steps:
       - bash: |
           echo 'Template...'
-          sleep 30
+          sleep 10
   - job: 'innerBash2'
     displayName: 'Run some inner bash 2'
     dependsOn:
@@ -18,7 +18,7 @@ jobs:
     steps:
       - bash: |
           echo 'Template...'
-          sleep 30
+          sleep 10
       - bash: |
           echo $(git status)
   
