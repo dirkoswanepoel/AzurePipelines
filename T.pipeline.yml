@@ -17,6 +17,10 @@ stages:
           - bash: |
               echo 'Pipeline...'
               sleep 30
+          - bash: |
+              set -e
+              git fetch --unshallow
+              echo $(git status)
       - template: 'templates/T1.template.yml'
         parameters:
           job:
