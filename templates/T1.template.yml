@@ -1,5 +1,6 @@
 jobs:
   - job:
+    displayName: 'Run some inner bash'
     steps:
       - bash: |
           echo 'Template...'
