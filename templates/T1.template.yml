@@ -1,7 +1,22 @@
+parameters:
+  job:
+    dependsOn: ''
+
 jobs:
-  - job:
+  - job: 'innerBash1'
     displayName: 'Run some inner bash'
+    dependsOn:
+      - ${{ parameters.job.dependsOn }}
     steps:
       - bash: |
           echo 'Template...'
           sleep 30
+  - job: 'innerBash1'
+    displayName: 'Run some inner bash'
+    dependsOn:
+      - 'innerBash1'
+    steps:
+      - bash: |
+          echo 'Template...'
+          sleep 30
+  
