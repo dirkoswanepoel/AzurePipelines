@@ -1,0 +1,22 @@
+name: 'TEMPLATE_NESTING_TEST_$(Date:yyyyMMdd).$(Rev:rrr)'
+
+pr: none
+
+trigger: none
+
+pool:
+  name: Default
+
+stages:
+  - stage: 'Stage1'
+    displayName: 'Stage 1'
+    jobs:
+      - job:
+        displayName: 'Run some bash'
+        steps:
+          - bash: |
+              echo 'Pipeline...'
+              sleep 30
+      - template: 'templates/T1.template.yml'
+        
+            
