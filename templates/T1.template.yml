@@ -11,7 +11,7 @@ jobs:
       - bash: |
           echo 'Template...'
           sleep 30
-  - job: 'innerBash1'
+  - job: 'innerBash2'
     displayName: 'Run some inner bash'
     dependsOn:
       - 'innerBash1'
