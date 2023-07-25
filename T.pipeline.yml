@@ -22,15 +22,7 @@ stages:
               git fetch --unshallow
               git checkout develop
               echo $(git status)
-      - template: 'templates/T1.template.yml'
-        parameters:
-          job:
-            dependsOn: 'bash1'
-            name: 'innerBash1'
-      - template: 'templates/T1.template.yml'
-        parameters:
-          job:
-            dependsOn: 'innerBash1'
-            name: 'innerBash2'
+          - template: 'templates/T1.template.yml'
+          - template: 'templates/T1.template.yml'
         
             
