@@ -1,24 +1,16 @@
 parameters:
   job:
     dependsOn: ''
+    name: ''
 
-jobs:
-  - job: 'innerBash1'
-    displayName: 'Run some inner bash 1'
-    dependsOn:
-      - ${{ parameters.job.dependsOn }}
-    steps:
-      - bash: |
-          echo 'Template...'
-          sleep 10
-  - job: 'innerBash2'
-    displayName: 'Run some inner bash 2'
-    dependsOn:
-      - 'innerBash1'
-    steps:
-      - bash: |
-          echo 'Template...'
-          sleep 10
-      - bash: |
-          echo $(git status)
+- job: ${{ parameters.job.name }}
+  displayName: 'Run some inner bash'
+  dependsOn:
+    - ${{ parameters.job.dependsOn }}
+  steps:
+    - bash: |
+        echo 'Template...'
+        sleep 10
+    - bash: |
+        echo $(git status)
   
