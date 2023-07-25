@@ -20,6 +20,7 @@ stages:
           - bash: |
               set -e
               git fetch --unshallow
+              git checkout develop
               echo $(git status)
       - template: 'templates/T1.template.yml'
         parameters:
