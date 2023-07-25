@@ -1,0 +1,6 @@
+jobs:
+  - job:
+    steps:
+      - bash: |
+          echo 'Template...'
+          sleep 30
