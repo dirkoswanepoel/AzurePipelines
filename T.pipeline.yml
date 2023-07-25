@@ -11,12 +11,15 @@ stages:
   - stage: 'Stage1'
     displayName: 'Stage 1'
     jobs:
-      - job:
+      - job: 'bash1'
         displayName: 'Run some bash'
         steps:
           - bash: |
               echo 'Pipeline...'
               sleep 30
       - template: 'templates/T1.template.yml'
+        parameters:
+          job:
+            dependsOn: 'bash1'
         
             
