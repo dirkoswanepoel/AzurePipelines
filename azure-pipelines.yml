@@ -45,12 +45,6 @@ stages:
           - checkout: self
             clean: True
             persistCredentials: True
-          - bash: |
-              echo '$(NextProdVersion)'
-              echo '$(NextStagingVersion)'
-              echo '$(ProdBranch)'
-              echo '$(StagingBranch)'
-            displayName: 'Print versions'
             continueOnError: False
           - bash: |
               CurrentStaging=$(NextStagingVersion)
