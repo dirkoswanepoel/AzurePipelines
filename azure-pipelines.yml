@@ -58,6 +58,9 @@ stages:
               echo "##vso[task.setvariable variable=NewStagingBranch;]$NewStagingBranch"
             displayName: 'Calculate new version'
             continueOnError: False
+          - checkout: self
+            clean: True
+            persistCredentials: True
           - bash: |
               set -e
               git fetch --unshallow
