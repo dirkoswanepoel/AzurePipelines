@@ -7,6 +7,10 @@ trigger: none
 pool:
   name: Default
 
+variables:
+  - group: Versioning
+
+
 stages:
   - stage: 'BumpVersion'
     displayName: 'Bump Version'
