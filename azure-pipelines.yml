@@ -1,9 +1,17 @@
-name: 'STAGE_NESTING_TEST_$(Date:yyyyMMdd).$(Rev:rrr)'
+name: 'VARIABLE_TEST_$(Date:yyyyMMdd).$(Rev:rrr)'
 
 pr: none
 
 trigger:
   - develop
+
+resources:
+  repositories:
+    - repository: 'testrepo'
+      name: 'dirkoswanepoel/PipelineTests'
+      endpoint: 'GitHub'
+      type: 'github'
+      ref: develop
 
 pool:
   name: Default
@@ -25,7 +33,7 @@ stages:
               echo "##vso[task.setvariable variable=NewStagingVersion;]$NewStagingVersion"
             displayName: 'Calculate new version'
             continueOnError: False
-          - template: './templates/set-variable.template.yml'
+          - template: 'templates/set-variable.template.yml'
             parameters:
               job:
                 displayName: 'Set next Staging version'
@@ -42,7 +50,7 @@ stages:
     jobs:
       - job:
         steps:
-          - checkout: self
+          - checkout: 'testrepo'
             clean: True
             persistCredentials: True
             continueOnError: False
@@ -64,7 +72,7 @@ stages:
               git push origin release/$(NewStagingBranch)
             displayName: 'Create staging branch'
             continueOnError: False
-          - template: './templates/set-variable.template.yml'
+          - template: 'templates/set-variable.template.yml'
             parameters:
               job:
                 displayName: 'Set variables for new staging branch'
