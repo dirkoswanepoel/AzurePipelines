@@ -3,7 +3,7 @@ parameters:
   job:
     displayName: ''
   variableGroupKey:
-    id: '89'
+    id: '2'
     name: 'Versioning'
   variableGroup:
     prodBranch: ''
