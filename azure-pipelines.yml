@@ -12,6 +12,7 @@ variables:
 
 
 stages:
+
   - stage: 'BumpVersion'
     displayName: 'Bump Version'
     jobs:
@@ -27,12 +28,13 @@ stages:
           - template: './templates/set-variable.template.yml'
             parameters:
               job:
-                displayName: 'Set next Prod version'
+                displayName: 'Set next Staging version'
               variableGroup:
                 prodBranch: $(ProdBranch)
                 nextProdVersion: $(NextProdVersion)
                 stagingBranch: $(StagingBranch)
                 nextStagingVersion: $(NewStagingVersion)
+
   - stage: 'NewStagingBranch'
     displayName: 'New Staging Branch'
     dependsOn:
@@ -45,5 +47,32 @@ stages:
               echo '$(NextStagingVersion)'
               echo '$(ProdBranch)'
               echo '$(StagingBranch)'
+            displayName: 'Print versions'
+            continueOnError: False
+          - bash: |
+              CurrentStaging=$(NextStagingVersion)
+              CurrentStagingSplit=( ${CurrentStaging//./ } )
+              NewStagingVersion=${CurrentStagingSplit[0]}.$((CurrentStagingSplit[1]+1)).0
+              NewStagingBranch=v${CurrentStagingSplit[0]}.$((CurrentStagingSplit[1]+1)).x
+              echo "##vso[task.setvariable variable=NewStagingVersion;]$NewStagingVersion"
+              echo "##vso[task.setvariable variable=NewStagingBranch;]$NewStagingBranch"
             displayName: 'Calculate new version'
             continueOnError: False
+          - bash: |
+              set -e
+              git fetch --unshallow
+              git checkout develop
+              git pull
+              git checkout -b release/$(NewStagingBranch)
+              git push origin release/$(NewStagingBranch)
+            displayName: 'Create staging branch'
+            continueOnError: False
+          - template: './templates/set-variable.template.yml'
+            parameters:
+              job:
+                displayName: 'Set variables for new staging branch'
+              variableGroup:
+                prodBranch: $(StagingBranch)
+                nextProdVersion: $(NextStagingVersion)
+                stagingBranch: $(NewStagingBranch)
+                nextStagingVersion: $(NewStagingVersion)
