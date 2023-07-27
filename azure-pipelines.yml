@@ -3,14 +3,15 @@ name: 'STAGE_NESTING_TEST_$(Date:yyyyMMdd).$(Rev:rrr)'
 pr: none
 
 trigger:
-  - develop
+  branches:
+    include:
+    - develop
 
 pool:
   name: Default
 
 variables:
   - group: Versioning
-
 
 stages:
 
