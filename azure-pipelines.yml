@@ -2,7 +2,7 @@ name: 'STAGE_NESTING_TEST_$(Date:yyyyMMdd).$(Rev:rrr)'
 
 pr: none
 
-trigger: none
+trigger: develop
 
 pool:
   name: Default
