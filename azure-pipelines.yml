@@ -9,7 +9,7 @@ resources:
   repositories:
     - repository: 'testrepo'
       name: 'dirkoswanepoel/PipelineTests'
-      endpoint: 'GitHub'
+      endpoint: 'dirkoswanepoel'
       type: 'github'
       ref: develop
 
