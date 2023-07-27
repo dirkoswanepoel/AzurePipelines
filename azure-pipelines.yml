@@ -1,0 +1,45 @@
+name: 'STAGE_NESTING_TEST_$(Date:yyyyMMdd).$(Rev:rrr)'
+
+pr: none
+
+trigger: none
+
+pool:
+  name: Default
+
+stages:
+  - stage: 'BumpVersion'
+    displayName: 'Bump Version'
+    jobs:
+      - job:
+        steps:
+          - bash: |
+              CurrentStaging=$(NextStagingVersion)
+              CurrentStagingSplit=( ${CurrentStaging//./ } )
+              NewStagingVersion=${CurrentStagingSplit[0]}.${CurrentStagingSplit[1]}.$((CurrentStagingSplit[2]+1))
+              echo "##vso[task.setvariable variable=NewStagingVersion;]$NewStagingVersion"
+            displayName: 'Calculate new version'
+            continueOnError: False
+          - template: './templates/set-variable.template.yml'
+            parameters:
+              job:
+                displayName: 'Set next Prod version'
+              variableGroup:
+                prodBranch: $(ProdBranch)
+                nextProdVersion: $(NextProdVersion)
+                stagingBranch: $(StagingBranch)
+                nextStagingVersion: $(NewStagingVersion)
+  - stage: 'NewStagingBranch'
+    displayName: 'New Staging Branch'
+    dependsOn:
+      - BumpVersion
+    jobs:
+      - job:
+        steps:
+          - bash: |
+              echo '$(NextProdVersion)'
+              echo '$(NextStagingVersion)'
+              echo '$(ProdBranch)'
+              echo '$(StagingBranch)'
+            displayName: 'Calculate new version'
+            continueOnError: False
