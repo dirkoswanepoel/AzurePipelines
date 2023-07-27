@@ -1,0 +1,24 @@
+parameters:
+  devops_url: 'https://dev.azure.com/developer0653/pipelines'
+  job:
+    displayName: ''
+  variableGroupKey:
+    id: '89'
+    name: 'Versioning'
+  variableGroup:
+    prodBranch: ''
+    nextProdVersion: ''
+    stagingBranch: ''
+    nextStagingVersion: ''
+
+steps:
+  - task: PowerShell@2
+    displayName: ${{ parameters.job.displayName }}
+    continueOnError: false
+    inputs:
+      targetType: 'inline'
+      script: |
+        $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f "","$(System.AccessToken)")))
+        $url = "${{ parameters.devops_url }}/_apis/distributedtask/variablegroups/${{ parameters.variableGroupKey.id }}?api-version=5.0-preview.1"
+        $json = '{"id":${{ parameters.variableGroupKey.id }},"type":"Vsts","name":"${{ parameters.variableGroupKey.name }}","variables":{"ProdBranch":{"isSecret":false,"value":"${{ parameters.variableGroup.prodBranch }}"}, "NextProdVersion":{"isSecret":false,"value":"${{ parameters.variableGroup.nextProdVersion }}"}, "StagingBranch":{"isSecret":false,"value":"${{ parameters.variableGroup.stagingBranch }}"}, "NextStagingVersion":{"isSecret":false,"value":"${{ parameters.variableGroup.nextStagingVersion }}"}}}'
+        $pipeline = Invoke-RestMethod -Uri $url -Method Put -Body $json -ContentType "application/json" -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)}
